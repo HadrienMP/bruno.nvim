@@ -1,6 +1,7 @@
 local config = require("bruno.config")
 local collection = require("bruno.collection")
 local formatting = require("bruno.formatting")
+local secrets = require("bruno.secrets")
 
 local M = {}
 
@@ -62,6 +63,11 @@ function M.run_bruno()
 
 	if config.current_env then
 		cmd = cmd .. " --env " .. vim.fn.shellescape(config.current_env)
+	end
+
+	local secret_args = secrets.to_args(secrets.load(root_dir))
+	if secret_args ~= "" then
+		cmd = cmd .. " " .. secret_args
 	end
 
 	local bufnr = create_or_get_sidebar()

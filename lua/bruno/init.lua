@@ -19,6 +19,10 @@ function M.setup(opts)
 		config.suppress_formatting_errors = opts.suppress_formatting_errors
 	end
 
+	if opts.secrets_file ~= nil then
+		config.secrets_file = opts.secrets_file
+	end
+
 	if opts.picker ~= nil then
 		config.picker = opts.picker
 	end

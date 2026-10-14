@@ -55,7 +55,9 @@ Can also be installed from [nixpkgs](https://search.nixos.org/packages?channel=u
                 -- If output should be formatted by default.
                 show_formatted_output = true, 
                 -- If formatting fails for whatever reason, don't show error message (will always fallback to unformatted output).
-                suppress_formatting_errors = false
+                suppress_formatting_errors = false,
+                -- File next to the collection's bruno.json holding secret values (KEY=VALUE per line).
+                secrets_file = "secrets.env"
             }
         )
 	end
@@ -101,3 +103,16 @@ If you want to restrict rendering to only the Bruno output buffer, use:
 ### Toggle bruno-cli output formatting
 
 :BrunoToggleFormat
+
+# Secrets
+Place a `secrets.env` file next to your collection file (`bruno.json`, `opencollection.yml` or `collection.bru`)
+containing the values of the variables declared as secret in your environment:
+
+```env
+# comments are ignored
+API_TOKEN=abc123
+export DB_PASSWORD="p@ss word"
+```
+
+Every entry is passed to `bru run` with `--env-var KEY=VALUE`, whatever the selected environment.
+Add `secrets.env` to your `.gitignore`. Note that values are visible in the process list (`ps`) while the request runs.

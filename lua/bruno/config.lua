@@ -5,6 +5,7 @@ local M = {
 	suppress_formatting_errors = false,
 	picker = "telescope",
 	collection_paths = {},
+	secrets_file = "secrets.env",
 }
 
 return M
